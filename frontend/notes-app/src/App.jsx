@@ -17,7 +17,6 @@ const App = () => {
   return (
     <div>
       {routes}
-      
     </div>
   )
 }

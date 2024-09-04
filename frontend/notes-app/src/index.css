@@ -16,7 +16,7 @@
         @apply w-full text-sm bg-transparent border-[1.5px] px-5 py-3 rounded mb-4 outline-none ;
     }
     .btn-primary{
-        @apply  text-white rounded w-full mb-2 py-2 text-sm  ;  
+        @apply  text-white rounded w-full mb-2 py-2 text-sm  bg-primary ;  
     }
 
     .icon-btn {

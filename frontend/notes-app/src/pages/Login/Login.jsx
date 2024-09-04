@@ -44,7 +44,6 @@ const Login = () => {
       } else {
         setError('Login failed: Invalid response from server');
       }
-      console.log('Login response:', response);
     } catch (error) {
       console.log('Error details:', error.response || error);
       if (error.response && error.response.data && error.response.data.message) {

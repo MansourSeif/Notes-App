@@ -109,6 +109,7 @@ const Home = () => {
             type: 'add',
             data: null
           })}}
+           getAllNotes={getAllNotes}
            type={openAddEditModal.type}
            noteData={openAddEditModal.data}
          /> 

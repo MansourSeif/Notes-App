@@ -16,10 +16,11 @@ const AddEditNotes = ({ onClose, getAllNotes, noteData, type , handleShowToast }
             const response = await axiosInstance.post('/add-note', {
                 title,
                 content,
-                tags
+                tags,
             })
-            // update 
+            // update add the new note to the list 
             if (response.data && response.data.note) {
+                handleShowToast("Note Added Succcessfuly !")
                 getAllNotes()
                 onClose()
             }
@@ -38,9 +39,10 @@ const AddEditNotes = ({ onClose, getAllNotes, noteData, type , handleShowToast }
             const response = await axiosInstance.put("/edit-note/" + noteId , {
                 title , 
                 content , 
-                tags
+                tags,
             })
             if(response.data && response.data.note) {
+                handleShowToast("Note Updated Succcessfuly !" )
                 getAllNotes()
                 onClose()
             }

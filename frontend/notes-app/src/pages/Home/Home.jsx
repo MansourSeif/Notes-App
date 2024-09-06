@@ -27,7 +27,7 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  const handleShowToast = ( type) => {
+  const handleShowToast = (message , type) => {
     setShowToastMsg({
       isShown : true , 
       message, 

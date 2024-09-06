@@ -6,7 +6,7 @@ import AddEditNotes from './AddEditNotes'
 import Modal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../../utils/axiosinstance'
-import moment from "moment"
+import Toast from '../../components/ToastMessage/Toast'
 
 const Home = () => {
   
@@ -16,10 +16,41 @@ const Home = () => {
     data : null
   })
 
+  const [showToastMsg , setShowToastMsg] = useState({
+    isShown : false , 
+    message : "" , 
+    type: "add" , 
+  })
+
   const [allNotes , setAllNotes] = useState([])
   const [userInfo, setUserInfo] = useState(null)
 
   const navigate = useNavigate();
+
+  const handleShowToast = ( type) => {
+    setShowToastMsg({
+      isShown : true , 
+      message, 
+      type
+    })
+  }
+
+  const handleCloseToast = () => {
+    setShowToastMsg({
+      isShown : false , 
+      message : ""
+    })
+  }
+
+
+  const handleEdit =( noteDetails) => {
+    setOpenAddEditModal({
+      isShown : true , 
+      type : "edit" , 
+      data : noteDetails
+    })
+    
+  }
 
 // get user info
   const getUserInfo = async () => {
@@ -73,7 +104,7 @@ const Home = () => {
           content={note.content}
           tags={note.tags}
           isPinned={note.isPinned}
-          onEdit={() => {}}
+          onEdit={() => { handleEdit(note)}}
           onDelete={() => {}}
           onPinNote={() => {}} />
         
@@ -93,27 +124,41 @@ const Home = () => {
     </button>
 
     <Modal 
-    isOpen={openAddEditModal.isShown}
-    onRequestClose={()=>{}}
-    style={{
-        overlay: {
-            backgroundColor: 'rgba(0,0,0,0.2)'
-        },
-        
-        }}
-        contentLabel="" 
-        className='w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5 overflow-hidden'
-        > <AddEditNotes onClose={() =>{
-          setOpenAddEditModal({
-            isShown: false ,
-            type: 'add',
-            data: null
-          })}}
-           getAllNotes={getAllNotes}
-           type={openAddEditModal.type}
-           noteData={openAddEditModal.data}
-         /> 
-        </Modal>
+      isOpen={openAddEditModal.isShown}
+      onRequestClose={()=>{}}
+      style={{
+          overlay: {
+              backgroundColor: 'rgba(0,0,0,0.2)'
+          },
+
+          }}
+          contentLabel="" 
+          className='w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5 overflow-hidden'
+          >
+             <AddEditNotes 
+            onClose={() =>{
+            setOpenAddEditModal({
+              isShown: false ,
+              type: 'add',
+              data: null
+            })}}
+            getAllNotes={getAllNotes}
+            type={openAddEditModal.type}
+            noteData={openAddEditModal.data}
+            handleShowToast = {handleShowToast}
+           /> 
+      </Modal>
+
+      <Toast
+        message = {showToastMsg.message}
+        type = {showToastMsg.type}
+        isShown ={showToastMsg.isShown}
+        onClose = {handleCloseToast}
+      />
+
+
+
+
 </>
   )}
 

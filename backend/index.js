@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 // create an account 
-app.post('/create-account', async (req, res) => {
+app.post('https://mern-notes-app-6j15.onrender.com//create-account', async (req, res) => {
     const { fullname, email, password } = req.body;
 
     if (!fullname) {
@@ -78,7 +78,7 @@ app.post('/create-account', async (req, res) => {
 })
 
 // login
-app.post('/login', async (req, res) => {
+app.post('https://mern-notes-app-6j15.onrender.com//login', async (req, res) => {
     const { email, password } = req.body;
     if (!email) {
         return res.status(400)
@@ -114,7 +114,7 @@ app.post('/login', async (req, res) => {
 })
 
 // Get User
-app.get('/get-user', authenticateToken, async (req, res) => {
+app.get('https://mern-notes-app-6j15.onrender.com//get-user', authenticateToken, async (req, res) => {
     const {user} = req.user;
     const isUser = await User.findOne({_id:user._id}); 
     if(!isUser){
@@ -128,7 +128,7 @@ app.get('/get-user', authenticateToken, async (req, res) => {
 });
 
 // Add Note
-app.post("/add-note", authenticateToken, async (req, res) => {
+app.post("https://mern-notes-app-6j15.onrender.com//add-note", authenticateToken, async (req, res) => {
     const { title, content, tags } = req.body;
     const user = req.user;
     if (!title) {
@@ -156,7 +156,7 @@ app.post("/add-note", authenticateToken, async (req, res) => {
 });
 
 //Edit Note 
-app.put('/edit-note/:noteId', authenticateToken, async (req, res) => {
+app.put('https://mern-notes-app-6j15.onrender.com//edit-note/:noteId', authenticateToken, async (req, res) => {
     const noteId = req.params.noteId;
     const { title, content, tags, isPinned } = req.body;
     const user = req.user;
@@ -185,7 +185,7 @@ app.put('/edit-note/:noteId', authenticateToken, async (req, res) => {
 });
 
 // Get All Notes
-app.get('/get-all-notes', authenticateToken , async(req , res) => {
+app.get('https://mern-notes-app-6j15.onrender.com//get-all-notes', authenticateToken , async(req , res) => {
     const user = req.user  ; 
     try {
         const notes = await Note.find({userId : user._id}).sort({isPinned:-1});
@@ -197,7 +197,7 @@ app.get('/get-all-notes', authenticateToken , async(req , res) => {
 })
 
 //delete note
-app.delete('/delete-note/:noteId', authenticateToken , async(req , res) => {
+app.delete('https://mern-notes-app-6j15.onrender.com//delete-note/:noteId', authenticateToken , async(req , res) => {
     const noteId = req.params.noteId ;
     const user = req.user ;
     try {
@@ -214,7 +214,7 @@ app.delete('/delete-note/:noteId', authenticateToken , async(req , res) => {
 })
 
 // Get Note By ID
-app.get('/get-note/:noteId', authenticateToken , async(req , res) => {
+app.get('https://mern-notes-app-6j15.onrender.com//get-note/:noteId', authenticateToken , async(req , res) => {
     const noteId = req.params.noteId ;
     const user = req.user ;
     try {
@@ -231,7 +231,7 @@ app.get('/get-note/:noteId', authenticateToken , async(req , res) => {
 })
 
 // Pin Note
-app.put('/pin-note/:noteId', authenticateToken , async(req ,res) => {
+app.put('https://mern-notes-app-6j15.onrender.com//pin-note/:noteId', authenticateToken , async(req ,res) => {
     const noteId = req.params.noteId ; 
     const user = req.user ;
     try{
@@ -250,8 +250,6 @@ app.put('/pin-note/:noteId', authenticateToken , async(req ,res) => {
 
 
 
-app.listen(8000, () => {
-    console.log('Server is running on http://localhost:8000');
-});
+app.listen(8000);
 
 module.exports = app; 

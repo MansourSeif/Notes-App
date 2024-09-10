@@ -7,6 +7,8 @@ import Modal from 'react-modal'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../../utils/axiosinstance'
 import Toast from '../../components/ToastMessage/Toast'
+import EmptyCard from '../../components/EmptyCard/EmptyCard'
+import AddNotesImg from "../../assets/add-notes.png"
 
 const Home = () => {
   
@@ -112,25 +114,29 @@ const Home = () => {
 <Navbar userInfo ={userInfo} />
 
 <div className='container  mx-auto '>
+
+  { allNotes.length > 0 ?
+
     <div className='grid grid-cols-3 gap-4 mt-8'>
     {
       allNotes.map((note,index) =>( 
-         
-          <NoteCard 
-          key={note._id}
-          title={note.title}
-          date={note.createdOn} 
-          content={note.content}
-          tags={note.tags}
-          isPinned={note.isPinned}
-          onEdit={() => { handleEdit(note)}}
-          onDelete={() => {deleteNote(note)}}
-          onPinNote={() => {}} />
+        
+        <NoteCard 
+        key={note._id}
+        title={note.title}
+        date={note.createdOn} 
+        content={note.content}
+        tags={note.tags}
+        isPinned={note.isPinned}
+        onEdit={() => { handleEdit(note)}}
+        onDelete={() => {deleteNote(note)}}
+        onPinNote={() => {}} />
         
       ))
     }
-    
-    </div>
+    </div> 
+    : <EmptyCard imgSrc = {AddNotesImg} message="Start creating your first note! Click the 'Add' button to jot your thoughts, ideas, and reminders.Let's get started!" />
+    }
 </div>
     <button className='w-16 h-16 flex items-center justify-center rounded-2xl bg-primary hover:bg-blue-500 absolute right-10 bottom-10 ' onClick={()=>{
       setOpenAddEditModal({

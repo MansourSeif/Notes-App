@@ -12,9 +12,7 @@ const Navbar = ({userInfo}) => {
     navigate('/login') ; 
   }
 
-  const handleSearch = () => {
-
-  } ; 
+  const handleSearch = () => {} ; 
 
   const onClearSearch = () => {
     setSearchQuery('') ;

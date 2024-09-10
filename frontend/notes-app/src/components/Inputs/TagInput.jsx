@@ -27,7 +27,7 @@ const TagInput = ({ tags, setTags }) => {
     }
 
     return (
-        <div className=''>
+        <div >
             <div className='flex items-center gap-2 flex-wrap mt-2'>
                 {tags?.length > 0 &&
                     tags.map((tag, index) => {

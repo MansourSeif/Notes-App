@@ -26,7 +26,7 @@ const Home = () => {
 
   const [allNotes , setAllNotes] = useState([])
   const [userInfo, setUserInfo] = useState(null)
-
+  const [isSearching , setIsSearching] = useState(false)
   const navigate = useNavigate();
 
   const handleShowToast = (message , type) => {
@@ -101,6 +101,19 @@ const Home = () => {
 
   }
 
+  const onSearchNote = async (query) =>{
+    try {
+      const response = axiosInstance.get("/search-note" ,{params: {query},})
+      if(response.data && (await response).data.notes) {
+        setIsSearching(true) ; 
+        setAllNotes((await response).data.notes)
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  } 
+
 
   useEffect(() => {
     getAllNotes()
@@ -111,7 +124,7 @@ const Home = () => {
   
   return (
 <>
-<Navbar userInfo ={userInfo} />
+<Navbar userInfo ={userInfo} onSearchNote={onSearchNote} />
 
 <div className='container  mx-auto '>
 

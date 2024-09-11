@@ -250,7 +250,7 @@ app.put('/pin-note/:noteId', authenticateToken , async(req ,res) => {
 
 //Search Notes
 app.get('/search-note/', authenticateToken , async(req ,res) => {
-    const {user} = req.user ; 
+    const user = req.user ; 
     const {query} = req.query ; 
 
     if (!query){
@@ -266,7 +266,7 @@ app.get('/search-note/', authenticateToken , async(req ,res) => {
                 {content: {$regex: new RegExp(query,"i")}},
             ],
         }) ; 
-        
+
 
         return res.json({
             error:false , 
